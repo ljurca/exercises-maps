@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Driver {
     public static void main(String[] args) {
-        //String[] words1 = {"cat", "dog", "cat", "fox", "cat", "dog"};
-        //TextProcessing.computeFrequencies(words1);
+        String[] words1 = {"cat", "dog", "cat", "fox", "cat", "dog"};
+        TextProcessing.computeFrequencies(words1);
 
-        // String[] words2 = {"apple", "cat", "dog", "axe", "crawl", "anime", "fox"};
-        //TextProcessing.computeLengthToWords(words2);
+        String[] words2 = {"apple", "cat", "dog", "axe", "crawl", "anime", "fox"};
+        TextProcessing.computeLengthToWords(words2);
 
         //TextProcessing.computeFirstLetterToWords(words2);
 

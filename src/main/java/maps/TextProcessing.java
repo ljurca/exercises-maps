@@ -14,12 +14,17 @@ public class TextProcessing {
     public static void computeFrequencies(String[] words) {
         HashMap<String, Integer> counterMap = new HashMap<>();
         for (String word: words) {
-            // FILL IN CODE:
+            // add the word to the map, starting with value of 1
+            if (!counterMap.containsKey(word)){
+                counterMap.put(word, 1);
+            } else {
+                counterMap.put(word, counterMap.get(word) + 1);
+            }
 
         }
 
         // Print the map:
-        // FILL IN CODE
+        System.out.println(counterMap);
 
     }
 
@@ -28,15 +33,28 @@ public class TextProcessing {
      * @param words array of strings
      */
     public static void computeLengthToWords(String[] words) {
-        HashMap<Integer, HashSet<String>> lengthToWords = new HashMap<>();
+        // HashSet will avoid duplicates
+        Map<Integer, HashSet<String>> lengthToWords = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             int l = word.length();
+//            // Option 1:
+//            if (!lengthToWords.containsKey(l)){
+//                lengthToWords.put(l, new HashSet<>());
+//            }
+//            lengthToWords.get(l).add(word);
 
-            // FILL IN CODE:
+            // Option 2:
+//            lengthToWords.putIfAbsent(l, new HashSet<>()); // If absent, add new hashset to add new length
+//            lengthToWords.get(l).add(word); // Add the word in all cases to the corresponding length
+
+            // Option 3:
+            lengthToWords.computeIfAbsent(l, _ -> new HashSet<>()).add(word);
+
         }
         // Print the map
         // FILL IN CODE:
+        System.out.println(lengthToWords);
 
     }
 
@@ -45,7 +63,7 @@ public class TextProcessing {
      * @param words array of words
      */
     public static void computeFirstLetterToWords(String[] words) {
-        HashMap<Character, HashSet<String>> firstLetterMap = new HashMap<>();
+        Map<Character, HashSet<String>> firstLetterMap = new HashMap<>();
         // The key is the character and the value is the hash set of words that have this character in position 0 (the first character of the word)
         /* Example: Suppose the words are {"cat", "parrot", "crane", "fox", "panda"}
          The map may look like this:
@@ -98,7 +116,20 @@ public class TextProcessing {
         }
         */
 
-        // FILL IN CODE:
+        for (City city: cities){
+            String continent = city.getContinent();
+            if (!world.containsKey(continent)){
+                world.put(continent, new HashMap<>());
+            }
+            Map<String, Map<String, Integer>> countryMap = world.get(continent);
+            if (!countryMap.containsKey((city.getCountry()))) {
+                countryMap.put(city.getCountry(), new HashMap<>());
+            }
+            Map<String, Integer> cityMap = countryMap.get(city.getCountry());
+            cityMap.put(city.getName(), city.getPopulation());
+        }
+
+        System.out.println(world);
     }
 
 }
